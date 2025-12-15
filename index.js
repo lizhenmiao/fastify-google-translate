@@ -1,8 +1,7 @@
 import Fastify from 'fastify'
-import { 
-  handleTranslateRequest, 
-  getCorsHeaders, 
-  getApiDoc, 
+import {
+  handleTranslateRequest,
+  getApiDoc,
   getHealthCheck,
   logger
 } from 'google-translate-universal'
@@ -22,6 +21,7 @@ const logHandler = (level, ...args) => {
     fastify.log.info(`[翻译日志] [${level.toUpperCase()}]`, ...args)
   }
 }
+
 logger.on(logHandler)
 
 // 程序退出时清理日志监听器
@@ -53,7 +53,7 @@ fastify.route({
   url: '/translate',
   handler: async (request, reply) => {
     let params = {}
-    
+
     if (request.method === 'GET') {
       // GET 请求：所有参数包括 token 都从 query 获取
       const { text, source_lang, target_lang, token } = request.query
@@ -75,10 +75,10 @@ fastify.route({
         token: request.query.token  // POST 的 token 也从 query 获取
       }
     }
-    
+
     const headers = request.method === 'POST' ? { authorization: request.headers.authorization } : {}
     const result = await handleTranslateRequest(params, headers, ACCESS_TOKEN, { verbose: true })
-    
+
     reply.status(result.code === 200 ? 200 : 500)
     return result
   }
@@ -86,11 +86,13 @@ fastify.route({
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 3000 })
-    console.log('Server running on port 3000')
+    const PORT = process.env.PORT || 3000
+    await fastify.listen({ port: PORT })
+    console.log(`Server running on port ${PORT}`)
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
   }
 }
+
 start()

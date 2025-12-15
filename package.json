@@ -4,7 +4,8 @@
   "description": "A Fastify based Google Translate service",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "echo 'No build step required for Node.js project' && exit 0"
   },
   "keywords": [
     "fastify",
