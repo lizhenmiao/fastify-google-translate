@@ -1,0 +1,25 @@
+{
+  "name": "fastify-google-translate-service",
+  "version": "1.0.0",
+  "description": "A Fastify based Google Translate service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "fastify",
+    "google-translate",
+    "translate",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.0.0",
+    "@fastify/cors": "^8.0.0",
+    "google-translate-universal": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
